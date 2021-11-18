@@ -27,7 +27,6 @@ sealed class ApiResponse<out T> {
             }
         } ?: ApiErrorResponse(null, "unknow error")
 
-        fun <T> empty(): ApiResponse<T> = ApiEmptyResponse
     }
 }
 

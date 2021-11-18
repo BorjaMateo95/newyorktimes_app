@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
@@ -18,6 +19,13 @@ object NetworkModule {
     @Provides
     fun provideGsonServer(): Gson = GsonBuilder().create()
 
+    @Provides
+    @Named("okHttpClient")
+    fun provideOkHttpClientBuilder(): OkHttpClient.Builder =
+        HttpLoggingInterceptor().run {
+            level = HttpLoggingInterceptor.Level.BODY
+            OkHttpClient.Builder().addInterceptor(this)
+        }
 
     @Provides
     @Named("retrofitClient")
@@ -25,7 +33,7 @@ object NetworkModule {
         @Named("okHttpClient") okHttpClientBuilder: OkHttpClient.Builder,
         gson: Gson
     ): Retrofit =
-        Retrofit.Builder().baseUrl("")
+        Retrofit.Builder().baseUrl("https://api.nytimes.com/svc/mostpopular/v2/")
             .client(okHttpClientBuilder.build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation">
+<navigation
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/optionsFragment">
+
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="com.borja.pruebanewyorktimes.ui.options.OptionsFragment"
+        tools:layout="@layout/options_fragment"
+        android:label="OptionsFragment" >
+        <action
+            android:id="@+id/action_optionsFragment_to_newsListFragment"
+            app:destination="@id/newsListFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_optionsFragment"
+        app:destination="@id/optionsFragment" />
+    <fragment
+        android:id="@+id/newsListFragment"
+        android:name="com.borja.pruebanewyorktimes.ui.list.NewsListFragment"
+        android:label="news_list_fragment"
+        tools:layout="@layout/news_list_fragment" >
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="period"
+            app:argType="integer" />
+        <argument
+            android:name="mostPopularBy"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
 
 </navigation>
