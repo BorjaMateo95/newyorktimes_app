@@ -34,6 +34,17 @@
             android:name="mostPopularBy"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_newsListFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.borja.pruebanewyorktimes.ui.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 
 
